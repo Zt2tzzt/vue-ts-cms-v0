@@ -3,8 +3,8 @@
  * @Author: ZeT1an
  * @Date: 2022-03-09 22:25:16
  * @LastEditors: ZeT1an
- * @LastEditTime: 2022-03-09 23:12:11
- * @LastEditContent: 
+ * @LastEditTime: 2022-03-10 00:43:51
+ * @LastEditContent:
 -->
 <template>
 	<img alt="Vue logo" src="./assets/logo.png" />
@@ -12,7 +12,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent } from
+
+
+
+
+
+
+'vue'
 import HelloWorld from './components/HelloWorld.vue'
 
 export default defineComponent({
