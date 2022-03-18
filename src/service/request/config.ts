@@ -19,13 +19,13 @@ const TIME_OUT = 3000
 
 switch (process.env.NODE_ENV) {
 	case 'development':
-		BASE_URL = 'http://123.207.32.32:9001'
+		BASE_URL = '/api'
 		break
 	case 'production':
-		BASE_URL = 'http://zzt.org/prod'
+		BASE_URL = '/api'
 		break
 	case 'test':
-		BASE_URL = 'http://zzt.org/prod'
+		BASE_URL = '/api'
 		break
 }
 

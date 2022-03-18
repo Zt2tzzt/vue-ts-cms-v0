@@ -1,5 +1,6 @@
 import ZTRequest from './request'
 import { BASE_URL, TIME_OUT } from './request/config'
+import storage from '@/utils/cache'
 
 const ztRequest = new ZTRequest({
 	baseURL: BASE_URL,
@@ -7,10 +8,10 @@ const ztRequest = new ZTRequest({
 	interceptor: {
 		requestInterceptor(config) {
 			// 携带token的拦截
-			/* const token = 'hello'
+			const token = storage.getCache('token')
 			if (token) {
 				config.headers!.Authorization = `Bearer ${token}`
-			} */
+			}
 			console.log('单例拦截，请求成功')
 			return config
 		},

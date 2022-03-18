@@ -1,8 +1,9 @@
 <template>
 	<div class="login-panel">
 		<h1 class="title">后台管理系统</h1>
-		<el-tabs type="border-card" class="demo-tabs" stretch>
-			<el-tab-pane>
+		<!-- 登录选项卡界面 -->
+		<el-tabs type="border-card" class="demo-tabs" stretch v-model="currentTab">
+			<el-tab-pane name="account">
 				<template #label>
 					<span class="custom-tabs-label">
 						<el-icon><avatar /></el-icon>
@@ -11,25 +12,23 @@
 				</template>
 				<login-account ref="accoutRef" />
 			</el-tab-pane>
-			<el-tab-pane>
+			<el-tab-pane name="phone">
 				<template #label>
 					<span class="custom-tabs-label">
 						<el-icon><cellphone /></el-icon>
 						<span>手机登录</span>
 					</span>
 				</template>
-				<login-phone />
+				<login-phone ref="phoneRef" />
 			</el-tab-pane>
 		</el-tabs>
-		<!-- 下方记住密码 -->
+		<!-- 下方记住密码，忘记密码 -->
 		<div class="account-control">
 			<el-checkbox v-model="isKeepPassword">记住密码</el-checkbox>
 			<el-link type="primary">忘记密码</el-link>
 		</div>
 		<!-- 登录按钮 -->
-		<el-button class="login-btn" type="primary" @click="handleLoginClick"
-			>立即登录</el-button
-		>
+		<el-button class="login-btn" type="primary" @click="handleLoginClick">立即登录</el-button>
 	</div>
 </template>
 
@@ -38,12 +37,18 @@ import { Avatar, Cellphone } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import LoginAccount from './LoginAccount.vue'
 import LoginPhone from './LoginPhone.vue'
-
-const isKeepPassword = ref(false)
+// 定义属性
+const isKeepPassword = ref(true) // 是否记住密码
 const accoutRef = ref<InstanceType<typeof LoginAccount>>()
-
+const phoneRef = ref<InstanceType<typeof LoginPhone>>()
+const currentTab = ref('account')
+// 定义方法
 const handleLoginClick = () => {
-	accoutRef.value?.loginAction()
+	if (currentTab.value === 'account') {
+		accoutRef.value?.loginAction(isKeepPassword.value)
+	} else {
+		phoneRef.value?.loginAction()
+	}
 }
 </script>
 

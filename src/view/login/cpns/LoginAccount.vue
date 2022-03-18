@@ -5,7 +5,7 @@
 				<el-input v-model="account.name" />
 			</el-form-item>
 			<el-form-item label="密码" prop="password">
-				<el-input v-model="account.password" />
+				<el-input v-model="account.password" show-password />
 			</el-form-item>
 		</el-form>
 	</div>
@@ -15,20 +15,35 @@
 import { ElForm } from 'element-plus'
 import { reactive, defineExpose, ref } from 'vue'
 import { rules } from '../config/account-config'
+import storage from '@/utils/cache'
+import { useStore } from 'vuex'
 
 const account = reactive({
-	name: '',
-	password: ''
+	name: storage.getCache('name') ?? '',
+	password: storage.getCache('password') ?? ''
 })
-
 const formRef = ref<InstanceType<typeof ElForm>>()
-
-const loginAction = () => {
-	console.log('accout正在开始登陆')
+const store = useStore()
+const loginAction = (isKeepPassword: boolean) => {
 	formRef.value?.validate(valid => {
-		console.log('---valid---', valid)
 		if (valid) {
-			console.log('真正的登录逻辑')
+			// 判断是否需要记住密码
+			if (isKeepPassword) {
+				storage.setCache('name', account.name)
+				storage.setCache('password', account.password)
+			} else {
+				storage.deleteCache('name')
+				storage.deleteCache('password')
+			}
+			/**
+			 * 进行登录验证，5件事
+			 * 1.登录逻辑（网络请求，拿到数据后处理）
+			 * 2.数据的保存到某一位置
+			 * 3.发送其他的请求（请求当前用户的信息）
+			 * 4.拿到用户的菜单。
+			 * 5.跳到首页
+			 */
+			store.dispatch('login/accountLoginAction', { ...account })
 		}
 	})
 }

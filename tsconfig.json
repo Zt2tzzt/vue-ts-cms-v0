@@ -7,22 +7,22 @@
 		"module": "esnext",
 		// 使用严格模式的检查
 		"strict": true,
-		// 对jsx进行处理，preserve表示不转化
+		// 对jsx进行处理，preserve表示不转化，保留所有jsx格式
 		"jsx": "preserve",
 		// 按照node的模块解析规则
 		"moduleResolution": "node",
-		// 跳过一些库的类型检测
+		// 跳过一些库的类型检测,只检测项目中用到的类型
 		"skipLibCheck": true,
 		// es module 和 commonjs 能不能混合使用
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
 		"useDefineForClassFields": true,
-		// 是否生成映射文件（ts -> js)
+		// 是否生成sourcemap映射文件（ts -> js)
 		"sourceMap": true,
 		// 文件路径在解析时的基本url
 		"baseUrl": ".",
-		// 指定具体要解析的类型。
+		// 指定具体要加载的类型，默认都会加载。
 		"types": ["webpack-env", "element-plus/global"],
 		// 路径解析
 		"paths": {

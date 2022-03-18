@@ -10,7 +10,7 @@ import type { ZTRequestInterceptor, ZTRequestConfig } from './type'
 import { ElLoading } from 'element-plus'
 import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 
-const DEFAULT_LOADING = false
+const DEFAULT_LOADING = true
 
 class ZTRequest {
 	instance: AxiosInstance
@@ -43,7 +43,7 @@ class ZTRequest {
 				if (this.showLoading) {
 					this.loadingInstance = ElLoading.service({
 						lock: true,
-						text: '正在请求数据...',
+						text: '正在加载...',
 						background: 'rgba(0,0,0,0.5)'
 					})
 				}
@@ -60,20 +60,21 @@ class ZTRequest {
 				// 关闭loading动画
 				this.loadingInstance?.close()
 				const data = res.data
-				if (data.code !== 200) {
+				/* if (data.code !== 200) {
 					console.log('请求失败')
 				} else {
 					return data
-				}
+				} */
+				return data
 			},
 			err => {
 				console.log('全局拦截，响应失败')
 				// 关闭loading动画
 				this.loadingInstance?.close()
 				// 示例
-				if (err.response.status === 404) {
+				/* if (err.response.status === 404) {
 					console.log('404错误')
-				}
+				} */
 				return err
 			}
 		)
@@ -87,7 +88,7 @@ class ZTRequest {
 				config = config.interceptor.requestInterceptor(config)
 			}
 			// 2.判断是否要显示loading
-			if (config.showLoading) {
+			if (config.showLoading === false) {
 				this.showLoading = config.showLoading
 			}
 
@@ -101,7 +102,6 @@ class ZTRequest {
 					}
 					// 将showLoading设置还原，不影响下一个请求
 					this.showLoading = DEFAULT_LOADING
-					// 将结果通过resolve返回出去
 					resolve(res)
 				})
 				.catch(err => {

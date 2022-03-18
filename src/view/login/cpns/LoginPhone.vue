@@ -1,6 +1,6 @@
 <template>
 	<div class="login-phone">
-		<el-form label-width="65px" :rules="rules" :model="phone">
+		<el-form label-width="65px" :rules="rules" :model="phone" ref="formRef">
 			<el-form-item label="手机号" prop="number">
 				<el-input v-model="phone.number" />
 			</el-form-item>
@@ -15,13 +15,19 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ElForm } from 'element-plus'
+import { reactive, ref, defineExpose } from 'vue'
 import { rules } from '../config/phone-config'
 
 const phone = reactive({
 	number: '',
 	code: ''
 })
+const formRef = ref<InstanceType<typeof ElForm>>()
+const loginAction = () => {
+	formRef.value?.validate(/* valid => {} */)
+}
+defineExpose({ loginAction })
 </script>
 
 <style scoped lang="less">
