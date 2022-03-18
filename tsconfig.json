@@ -1,23 +1,37 @@
+// 用tsc编译时，需要的配置文件。
 {
 	"compilerOptions": {
+		// 目标代码（ts -> js(es5/6/7/...)），在该项目中实际会通过babel再转换
 		"target": "esnext",
+		// 目标代码需要使用的模块化方案，‘umd’表示支持多种模块化
 		"module": "esnext",
+		// 使用严格模式的检查
 		"strict": true,
+		// 对jsx进行处理，preserve表示不转化
 		"jsx": "preserve",
+		// 按照node的模块解析规则
 		"moduleResolution": "node",
+		// 跳过一些库的类型检测
 		"skipLibCheck": true,
+		// es module 和 commonjs 能不能混合使用
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"forceConsistentCasingInFileNames": true,
 		"useDefineForClassFields": true,
+		// 是否生成映射文件（ts -> js)
 		"sourceMap": true,
+		// 文件路径在解析时的基本url
 		"baseUrl": ".",
-		"types": ["webpack-env"],
+		// 指定具体要解析的类型。
+		"types": ["webpack-env", "element-plus/global"],
+		// 路径解析
 		"paths": {
 			"@/*": ["src/*"]
 		},
+		// 指定在项目中可以使用哪些库的类型（如是否可以使用Proxy/window/document）
 		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
 	},
+	// 有哪些ts代码需要经过编译解析
 	"include": [
 		"src/**/*.ts",
 		"src/**/*.tsx",
@@ -25,5 +39,6 @@
 		"tests/**/*.ts",
 		"tests/**/*.tsx"
 	],
+	// 排除不需要进行ts解析的目录。
 	"exclude": ["node_modules"]
 }

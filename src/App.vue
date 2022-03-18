@@ -1,42 +1,23 @@
-<!--
- * @Description: file content
- * @Author: ZeT1an
- * @Date: 2022-03-09 22:25:16
- * @LastEditors: ZeT1an
- * @LastEditTime: 2022-03-10 00:43:51
- * @LastEditContent:
--->
 <template>
-	<img alt="Vue logo" src="./assets/logo.png" />
-	<HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+	<div class="app">
+		<router-link to="/login">登录</router-link>
+		<router-link to="/main">首页</router-link>
+		<router-view></router-view>
+	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from
+import { defineComponent } from 'vue'
+// import 'element-plus/theme-chalk/el-button.css'
 
-
-
-
-
-
-'vue'
-import HelloWorld from './components/HelloWorld.vue'
-
+// 使用TS需要引入defineComponent函数
 export default defineComponent({
-	name: 'App',
-	components: {
-		HelloWorld
-	}
+	name: 'App'
 })
 </script>
 
 <style lang="less">
-#app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
+.app {
+	height: 100%;
 }
 </style>
