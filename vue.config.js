@@ -16,15 +16,15 @@ module.exports = defineConfig({
 		// 这个里面的配置，和webpack中的一致，本质上通过merge合并
 		/* resolve: {
 			alias: {
-				view: '@/view' //vue默认再path.resolve中已配置了@对应src目录
+				views: '@/views' //vue默认再path.resolve中已配置了@对应src目录
 			}
 		} */
 		devServer: {
 			proxy: {
-				'/api': {
+				'/dev': {
 					target: 'http://152.136.185.210:5000', // 代理的目标地址，默认情况下将代理http://localhost:8888/api这个路径
 					pathRewrite: {
-						'^/api': '' // 在代理路径中删除掉/api
+						'^/dev': '' // 在代理路径中删除掉/dev
 					},
 					secure: false, // 在https的情况下，仍代理，默认为true
 					changeOrigin: true // 表示是否更新代理后请求的headers中host地址，默认http://localhost:8000,应该为http://localhost:8888
@@ -47,13 +47,13 @@ module.exports = defineConfig({
 		config.resolve.alias = {
 			// 配置@，使用绝对路径
 			'@': path.resolve(__dirname, 'src'),
-			view: '@/view'
+			views: '@/views'
 		}
 	}, */
 	// 方式三
 	/* chainWebpack(config) {
 		config.resolve.alias
 			.set('@', path.resolve(__dirname, 'src'))
-			.set('view', '@/view')
+			.set('views', '@/views')
 	} */
 })

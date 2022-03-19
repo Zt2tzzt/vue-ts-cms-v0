@@ -19,7 +19,7 @@ const TIME_OUT = 3000
 
 switch (process.env.NODE_ENV) {
 	case 'development':
-		BASE_URL = '/api'
+		BASE_URL = '/dev'
 		break
 	case 'production':
 		BASE_URL = '/api'

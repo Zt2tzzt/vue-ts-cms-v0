@@ -7,11 +7,10 @@ enum LoginApi {
 	USERMENUS = '/role/'
 }
 
-export function accountLoginRequest(data: IAccount) {
+export function accountLoginRequest(account: IAccount) {
 	return ztRequest.post<IDataType<ILoginResult>>({
 		url: LoginApi.ACCOUNTLOGIN,
-		data,
-		showLoading: true
+		data: account
 	})
 }
 

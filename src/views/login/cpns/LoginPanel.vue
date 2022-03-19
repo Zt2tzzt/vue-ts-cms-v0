@@ -24,7 +24,7 @@
 		</el-tabs>
 		<!-- 下方记住密码，忘记密码 -->
 		<div class="account-control">
-			<el-checkbox v-model="isKeepPassword">记住密码</el-checkbox>
+			<el-checkbox v-model="isKeepPws">记住密码</el-checkbox>
 			<el-link type="primary">忘记密码</el-link>
 		</div>
 		<!-- 登录按钮 -->
@@ -38,14 +38,14 @@ import { ref } from 'vue'
 import LoginAccount from './LoginAccount.vue'
 import LoginPhone from './LoginPhone.vue'
 // 定义属性
-const isKeepPassword = ref(true) // 是否记住密码
+const isKeepPws = ref(true) // 是否记住密码
 const accoutRef = ref<InstanceType<typeof LoginAccount>>()
 const phoneRef = ref<InstanceType<typeof LoginPhone>>()
 const currentTab = ref('account')
 // 定义方法
 const handleLoginClick = () => {
 	if (currentTab.value === 'account') {
-		accoutRef.value?.loginAction(isKeepPassword.value)
+		accoutRef.value?.loginAction(isKeepPws.value)
 	} else {
 		phoneRef.value?.loginAction()
 	}

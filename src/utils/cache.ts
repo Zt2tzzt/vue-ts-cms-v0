@@ -4,6 +4,10 @@ class LocalCache {
 		this.storage = isLocal ? localStorage : sessionStorage
 	}
 
+	length() {
+		return this.storage.length
+	}
+
 	setCache(key: string, value: any) {
 		if (value) {
 			const res = JSON.stringify(value)
@@ -22,6 +26,10 @@ class LocalCache {
 
 	clearCache() {
 		this.storage.clear()
+	}
+
+	key(n: number) {
+		return this.storage.key(n)
 	}
 }
 

@@ -32,13 +32,7 @@
 		"lib": ["esnext", "dom", "dom.iterable", "scripthost"]
 	},
 	// 有哪些ts代码需要经过编译解析
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.vue",
-		"tests/**/*.ts",
-		"tests/**/*.tsx"
-	],
-	// 排除不需要进行ts解析的目录。
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
+	// 排除不需要进行ts解析的目录。在需要解析的目录下有引用就不会解析。
 	"exclude": ["node_modules"]
 }

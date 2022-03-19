@@ -1,12 +1,12 @@
 import router from '@/router'
 import { Module } from 'vuex'
-import { LoginState } from './type'
-import { RootState } from '../type'
+import type { ILoginState } from './type'
+import type { IRootState } from '../type'
 import { accountLoginRequest, requestUserInfoById, requestUserMenuByRoleId } from '@/service/login'
 import type { IAccount } from '@/service/login/type'
 import storage from '@/utils/cache'
 
-const loginModule: Module<LoginState, RootState> = {
+const loginModule: Module<ILoginState, IRootState> = {
 	namespaced: true,
 	state() {
 		return {
@@ -57,7 +57,7 @@ const loginModule: Module<LoginState, RootState> = {
 			}
 			const userInfo = storage.getCache('userInfo')
 			if (userInfo) {
-				commit('changechangeUserInfooken', userInfo)
+				commit('changeUserInfo', userInfo)
 			}
 			const userMenu = storage.getCache('userMenu')
 			if (userMenu) {

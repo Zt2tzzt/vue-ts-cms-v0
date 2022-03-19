@@ -1,6 +1,6 @@
 <template>
 	<div class="login-account">
-		<el-form label-width="60px" :rules="rules" :model="account" ref="formRef">
+		<el-form label-width="55px" :rules="rules" :model="account" ref="formRef">
 			<el-form-item label="账号" prop="name">
 				<el-input v-model="account.name" />
 			</el-form-item>
@@ -24,11 +24,11 @@ const account = reactive({
 })
 const formRef = ref<InstanceType<typeof ElForm>>()
 const store = useStore()
-const loginAction = (isKeepPassword: boolean) => {
+const loginAction = (isKeepPws: boolean) => {
 	formRef.value?.validate(valid => {
 		if (valid) {
 			// 判断是否需要记住密码
-			if (isKeepPassword) {
+			if (isKeepPws) {
 				storage.setCache('name', account.name)
 				storage.setCache('password', account.password)
 			} else {
@@ -37,10 +37,10 @@ const loginAction = (isKeepPassword: boolean) => {
 			}
 			/**
 			 * 进行登录验证，5件事
-			 * 1.登录逻辑（网络请求，拿到数据后处理）
-			 * 2.数据的保存到某一位置
-			 * 3.发送其他的请求（请求当前用户的信息）
-			 * 4.拿到用户的菜单。
+			 * 1.请求token。
+			 * 2.请求用户信息userInfo。
+			 * 3.请求用户菜单userMenu
+			 * 4.数据的保存到vuex和本地缓存
 			 * 5.跳到首页
 			 */
 			store.dispatch('login/accountLoginAction', { ...account })
