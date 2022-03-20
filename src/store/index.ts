@@ -22,6 +22,7 @@ const store = createStore<IRootState>({
 export function setupStore() {
 	store.dispatch('login/loadLocalLogin')
 }
+
 /**
  * @description: 此函数用于，封装自己的useStore函数，使得使用子模块的数据时加入类型检测。
  * @Author: ZeT1an

@@ -19,7 +19,12 @@ module.exports = defineConfig({
 				views: '@/views' //vue默认再path.resolve中已配置了@对应src目录
 			}
 		} */
+		module: {
+			exprContextCritical: false
+		},
 		devServer: {
+			// 在刷新时，会自动返回index.html的内容，前端路由根据路径渲染相应的组件
+			historyApiFallback: true,
 			proxy: {
 				'/dev': {
 					target: 'http://152.136.185.210:5000', // 代理的目标地址，默认情况下将代理http://localhost:8888/api这个路径

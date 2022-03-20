@@ -9,14 +9,21 @@ const routes: RouteRecordRaw[] = [
 	},
 	{
 		path: '/login',
+		name: 'login',
 		component: () => import('@/views/login/Login.vue')
 	},
 	{
 		path: '/main',
+		name: 'main',
 		component: () => import('@/views/main/Main.vue')
+	},
+	{
+		path: '/:pathMatch(.*)*',
+		name: 'not-found',
+		component: () => import('@/views/not-fount/NotFound.vue')
 	}
 	/**
-	 * 后台权限设计的思想之一：RBAC(role based access control)基于访问权限控制的权限管理。
+	 * 后台权限设计的思想之一：RBAC(role based access control)基于访问权限控制的角色管理。
 	 * 	维护用户表，权限表和关系表。
 	 * 理解3种在前端控制权限的方法，
 	 * 	方法一：注册所有路由，弊端：用户可通过手动改url实现禁止的权限。
@@ -33,6 +40,7 @@ const router = createRouter({
 	history: createWebHistory()
 })
 
+// 导航守卫
 router.beforeEach(to => {
 	if (to.path !== '/login') {
 		const token = storage.getCache('token')

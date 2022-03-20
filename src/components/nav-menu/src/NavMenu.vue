@@ -24,13 +24,16 @@
 			<template v-for="item of userMenu" :key="item.id">
 				<!-- 一级菜单：有子菜单 -->
 				<template v-if="item.type === 1">
+					<!-- el-sub-menu index属性值是string类型 -->
 					<el-sub-menu :index="item.id + ''">
+						<!-- 菜单标题 -->
 						<template #title>
 							<el-icon v-if="item.icon"><tickets /></el-icon>
 							<span>{{ item.name }}</span>
 						</template>
+						<!-- 二级菜单 -->
 						<template v-for="child of item.children" :key="child.id">
-							<el-menu-item :index="child.id + ''">
+							<el-menu-item :index="child.id + ''" @click="handleElMenuItemClick(child.url)">
 								<el-icon v-if="child.icon"><tickets /></el-icon>
 								<span>{{ child.name }}</span>
 							</el-menu-item>
@@ -53,15 +56,17 @@
 import { computed, defineProps } from 'vue'
 import { useStore } from '@/store'
 import { Tickets } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
 
-defineProps({
-	isCollapse: {
-		type: Boolean,
-		require
-	}
-})
+defineProps<{
+	isCollapse: boolean
+}>()
 const store = useStore()
 const userMenu = computed(() => store.state.login.userMenu)
+const router = useRouter()
+const handleElMenuItemClick = (url: string) => {
+	router.push({ path: url ?? '/not-fount' })
+}
 </script>
 
 <style scoped lang="less">

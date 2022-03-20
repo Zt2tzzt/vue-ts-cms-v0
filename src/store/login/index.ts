@@ -5,6 +5,7 @@ import type { IRootState } from '../type'
 import { accountLoginRequest, requestUserInfoById, requestUserMenuByRoleId } from '@/service/login'
 import type { IAccount } from '@/service/login/type'
 import storage from '@/utils/cache'
+import { mapMenusToRoutes } from '@/utils/map-menus'
 
 const loginModule: Module<ILoginState, IRootState> = {
 	namespaced: true,
@@ -24,6 +25,13 @@ const loginModule: Module<ILoginState, IRootState> = {
 		},
 		changeUserMenu(state, userMenu: any) {
 			state.userMenu = userMenu
+			// 为main添加二级路由
+			// 1.userMenu 映射到 routes
+			const routes = mapMenusToRoutes(userMenu)
+			// 2.将routes添加到router.main.chidren
+			routes.forEach(r => {
+				router.addRoute('main', r)
+			})
 		}
 	},
 	actions: {
@@ -64,9 +72,6 @@ const loginModule: Module<ILoginState, IRootState> = {
 				commit('changeUserMenu', userMenu)
 			}
 		}
-		/* phoneLoginAction({ commit }, payload: any) {
-			console.log('执行phoneLoginAction')
-		} */
 	}
 }
 
