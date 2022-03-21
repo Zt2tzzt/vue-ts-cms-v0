@@ -12,7 +12,7 @@
 			el-menu-item-group：文本标题
 		 -->
 		<el-menu
-			default-active="2"
+			:default-active="defaultActive"
 			class="el-menu-vertical-demo"
 			:collapse="isCollapse"
 			:unique-opened="false"
@@ -42,7 +42,7 @@
 				</template>
 				<!-- 一级菜单：无子菜单 -->
 				<template v-else-if="item.type === 2">
-					<el-menu-item :index="item.id + ''">
+					<el-menu-item :index="item.id + ''" @click="handleElMenuItemClick(item.url)">
 						<el-icon v-if="item.icon"><tickets /></el-icon>
 						<span>{{ item.name }}</span>
 					</el-menu-item>
@@ -53,20 +53,29 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps } from 'vue'
+import { computed, defineProps, ref } from 'vue'
 import { useStore } from '@/store'
 import { Tickets } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-menus'
 
 defineProps<{
 	isCollapse: boolean
 }>()
-const store = useStore()
-const userMenu = computed(() => store.state.login.userMenu)
+const userMenu = computed(() => useStore().state.login.userMenu)
 const router = useRouter()
 const handleElMenuItemClick = (url: string) => {
 	router.push({ path: url ?? '/not-fount' })
 }
+/**
+ * 菜单选中问题的处理：
+ * 1.拿到当前路径。
+ * 2.与userMenu中的路径做匹配。
+ * 3.将匹配后的userMenu的id设置给defaultActive
+ */
+const currentPath = useRoute().path
+const menu = pathMapToMenu(userMenu.value, currentPath)
+const defaultActive = ref(menu.id + '')
 </script>
 
 <style scoped lang="less">

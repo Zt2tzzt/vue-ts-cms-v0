@@ -1,6 +1,7 @@
 type IFormType = 'input' | 'password' | 'select' | 'datepicker'
 
 export interface IZtFormItem {
+	field: string
 	type: IFormType
 	label: string
 	rules?: any[]
@@ -17,10 +18,13 @@ export interface IColLayout {
 	sm: number // ≥760px 响应式栅格数或者栅格属性对象
 	xs: number // ≥768px 响应式栅格数或者栅格属性对象
 }
+export interface IItemStyle {
+	padding?: string
+}
 // 与ZtForm中的 IProps 保持一致。
 export interface IForm {
 	formItem: IZtFormItem[]
 	labelWidth?: string
-	itemStyle?: any
+	itemStyle?: IItemStyle
 	colLayout?: IColLayout
 }

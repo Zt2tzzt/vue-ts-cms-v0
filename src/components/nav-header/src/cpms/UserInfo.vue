@@ -19,10 +19,9 @@
 <script setup lang="ts">
 import { CircleClose, User, Setting } from '@element-plus/icons-vue'
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import { useStore } from '@/store'
 
-const store = useStore()
-const nickName = computed(() => store.state.login.userInfo.name)
+const nickName = computed(() => useStore().state.login.userInfo.name)
 </script>
 
 <style scoped lang="less">
