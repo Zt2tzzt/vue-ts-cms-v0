@@ -37,12 +37,12 @@ import { Avatar, Cellphone } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import LoginAccount from './LoginAccount.vue'
 import LoginPhone from './LoginPhone.vue'
-// 定义属性
+
 const isKeepPws = ref(true) // 是否记住密码
 const accoutRef = ref<InstanceType<typeof LoginAccount>>()
 const phoneRef = ref<InstanceType<typeof LoginPhone>>()
 const currentTab = ref('account')
-// 定义方法
+// 点击登录，调用该方法/
 const handleLoginClick = () => {
 	if (currentTab.value === 'account') {
 		accoutRef.value?.loginAction(isKeepPws.value)

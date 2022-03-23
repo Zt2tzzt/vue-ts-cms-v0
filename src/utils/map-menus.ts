@@ -11,8 +11,9 @@ export let firstRoute: RouteRecordRaw
  * @return {RouteRecordRaw[]} 匹配好的route对象数组。
  */
 export function mapMenusToRoutes(userMenu: any[]): RouteRecordRaw[] {
-	const routes: RouteRecordRaw[] = []
 	// 1.先默认加载所有的routes
+	const routes: RouteRecordRaw[] = []
+	// 定义所有的routes的数组
 	const allRoutes: RouteRecordRaw[] = []
 	// 使用webpack中reuire方法，加载/router/main下所有ts结尾的文件，第二个参数true代表递归加载， 不写/\.ts$/是考虑到可能会有tsx文件需要加载
 	const routeFiles = require.context('@/router/main', true, /\.ts/)
@@ -31,10 +32,11 @@ export function mapMenusToRoutes(userMenu: any[]): RouteRecordRaw[] {
 				const route = allRoutes.find(r => r.path === menu.url)
 				if (route) {
 					routes.push(route)
+					// 设置第一个匹配到的路由，可用来做默认路由跳转。
 					if (!firstRoute) firstRoute = route
 				}
 			} else {
-				// 一级菜单
+				// 一级菜单，做递归处理。
 				_recursseGetRoute(menu.children)
 			}
 		})
@@ -46,10 +48,11 @@ export function mapMenusToRoutes(userMenu: any[]): RouteRecordRaw[] {
 }
 
 /**
- * @description: 此函数用于，将当前的页面路径（location.path）匹配userMenu
+ * @description: 此函数用于，将当前的页面路径（location.path）匹配userMenu，并添加面包屑配置数组。
  * @Author: ZeT1an
  * @param {any} userMenu 登陆后获取的userMenu
  * @param {string} currentPath 当前页面路径（location.path）
+ * @param {IBreadcrumb[]} breadcrumbs 面包屑配置数组
  * @return {any} 匹配后的userMenu
  */
 export function pathMapToMenu(userMenu: any[], currentPath: string, breadcrumbs?: IBreadcrumb[]): any {

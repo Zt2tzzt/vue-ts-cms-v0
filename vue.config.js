@@ -25,12 +25,12 @@ module.exports = defineConfig({
 		devServer: {
 			proxy: {
 				'/dev': {
-					target: 'http://152.136.185.210:5000', // 代理的目标地址，默认情况下将代理http://localhost:8888/api这个路径
+					target: 'http://152.136.185.210:5000', // 代理的目标地址，默认情况下将代理 http://152.136.185.210:5000/dev 这个路径
 					pathRewrite: {
 						'^/dev': '' // 在代理路径中删除掉/dev
 					},
 					secure: false, // 在https的情况下，仍代理，默认为true
-					changeOrigin: true // 表示是否更新代理后请求的headers中host地址，默认http://localhost:8000,应该为http://localhost:8888
+					changeOrigin: true // 表示是否更新代理后请求的headers中host地址。
 				}
 			}
 		},

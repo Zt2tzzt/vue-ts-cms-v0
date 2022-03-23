@@ -43,10 +43,12 @@ const router = createRouter({
 
 // 导航守卫
 router.beforeEach(to => {
+	// 判断有无token，没有则条状登录页
 	if (to.path !== '/login') {
 		const token = storage.getCache('token')
 		if (!token) return '/login'
 	}
+	// 为'/main'设置默认路由，并跳转。
 	if (to.path === '/main') {
 		return firstRoute.path
 	}

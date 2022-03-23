@@ -64,6 +64,7 @@ defineProps<{
 }>()
 const userMenu = computed(() => useStore().state.login.userMenu)
 const router = useRouter()
+// 表单点击后，路由跳转
 const handleElMenuItemClick = (url: string) => {
 	router.push({ path: url ?? '/not-fount' })
 }
