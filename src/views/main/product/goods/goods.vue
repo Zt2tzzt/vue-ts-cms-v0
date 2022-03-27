@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import PageContent from '@/base-ui/page-content/src/PageContent.vue'
+import PageContent from '@/components/page-content/src/PageContent.vue'
 import { contentTableConfig } from './config/contentTableConfig'
 </script>
 

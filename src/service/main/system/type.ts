@@ -8,3 +8,8 @@ export interface IUserPageListDataParam {
 	pageName: string
 	queryInfo: IQuerInfo
 }
+
+export interface IDeleteDataParam {
+	pageName: string
+	id: string
+}

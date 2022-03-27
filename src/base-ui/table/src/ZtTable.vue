@@ -74,7 +74,7 @@ interface IProps {
 	showSelectColumn?: boolean
 	page?: IPageInfo
 	childrenProps?: ITableChildrenProps
-	showFooter: boolean
+	showFooter?: boolean
 }
 const props = withDefaults(defineProps<IProps>(), {
 	title: '',

@@ -1,6 +1,6 @@
 import type { IUserFormData } from '@/views/main/system/user/type'
 import { ref } from 'vue'
-import PageContent from '@/base-ui/page-content'
+import PageContent from '@/components/page-content'
 
 export default function usePageSearch() {
 	// 拿到page-content组件对象

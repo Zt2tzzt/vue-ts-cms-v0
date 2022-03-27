@@ -10,6 +10,8 @@ export interface IZtFormItem {
 	options?: any[]
 	// 针对某些特殊属性，如datapicker
 	otherOption?: any
+	// 是否隐藏输入框，用于编辑时弹出el-dialog时，隐藏不需要的输入项。
+	isHidden?: boolean
 }
 export interface IColLayout {
 	xl: number // ≥1920px 响应式栅格数或者栅格属性对象

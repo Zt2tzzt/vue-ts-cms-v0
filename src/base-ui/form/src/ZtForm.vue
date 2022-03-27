@@ -7,7 +7,12 @@
 			<el-row>
 				<template v-for="item of formItems" :key="item.label">
 					<el-col v-bind="colLayout">
-						<el-form-item :label="item.label" :rules="item.rules" :style="itemStyle">
+						<el-form-item
+							v-if="!item.isHidden"
+							:label="item.label"
+							:rules="item.rules"
+							:style="itemStyle"
+						>
 							<!-- input | password 元素 -->
 							<template v-if="item.type === 'input' || item.type === 'password'">
 								<el-input
@@ -103,6 +108,6 @@ export default defineComponent({
 
 <style scoped lang="less">
 .zt-form {
-	padding-top: 22px;
+	padding-top: 1px;
 }
 </style>

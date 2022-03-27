@@ -3,12 +3,38 @@ import type { Store } from 'vuex'
 import type { IRootState, IRootWithModule } from './type'
 import login from './login'
 import system from './main/system'
+import { getPageListData } from '@/service/main/system'
 
 const store = createStore<IRootState>({
 	state() {
 		return {
-			name: 'zzt',
-			age: 18
+			entireDepartment: [],
+			entireRole: []
+		}
+	},
+	mutations: {
+		changeEntireDepartment(state, list) {
+			state.entireDepartment = list
+		},
+		changeEntireRole(state, list) {
+			state.entireRole = list
+		}
+	},
+	actions: {
+		getInitialDataAction({ commit }) {
+			// 1.请求部门和角色数据。
+			getPageListData('/department/list', {
+				offset: 0,
+				size: 1000
+			}).then(res => {
+				commit('changeEntireDepartment', res.data.list)
+			})
+			getPageListData('/role/list', {
+				offset: 0,
+				size: 1000
+			}).then(res => {
+				commit('changeEntireRole', res.data.list)
+			})
 		}
 	},
 	modules: {
@@ -22,7 +48,10 @@ const store = createStore<IRootState>({
  * @Author: ZeT1an
  */
 export function setupStore() {
+	// 初始化登录后获取的数据。
 	store.dispatch('login/loadLocalLogin')
+	// 初始化部门，角色等公共数据。
+	store.dispatch('getInitialDataAction')
 }
 
 /**

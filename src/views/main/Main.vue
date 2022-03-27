@@ -2,7 +2,7 @@
 	<div class="main">
 		<el-container class="main-content">
 			<el-aside :width="isCollapse ? '60px' : '210px'">
-				<!-- 左侧菜单 -->
+				<!-- 左侧菜单，isCollapse菜单是否整体展开 -->
 				<nav-menu :isCollapse="isCollapse" />
 			</el-aside>
 			<el-container class="page">

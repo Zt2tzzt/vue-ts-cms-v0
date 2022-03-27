@@ -9,8 +9,8 @@ export const contentTableConfig: IContentTable = {
 		{ prop: 'cellphone', label: '手机号', minWidth: '100' },
 		{ prop: 'enable', label: '状态', minWidth: '100', slotName: 'status' },
 		{ prop: 'departmentId', label: '部门', minWidth: '100' },
-		{ prop: 'createAt', label: '创建时间', minWidth: '250', slotName: 'startTime' },
-		{ prop: 'updateAt', label: '更新时间', minWidth: '250', slotName: 'updateTime' },
+		{ prop: 'createAt', label: '创建时间', minWidth: '150', slotName: 'startTime' },
+		{ prop: 'updateAt', label: '更新时间', minWidth: '150', slotName: 'updateTime' },
 		{ label: '操作', minWidth: '120', slotName: 'handler' }
 	],
 	// 是否展示索引列
