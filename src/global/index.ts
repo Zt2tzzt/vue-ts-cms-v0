@@ -1,6 +1,6 @@
-// import { App } from 'vue'
-// import registElement from './regist-element'
+import { App } from 'vue'
+import registProperties from './regist-properties'
 
-// export default function (app: App) {
-// app.use(registElement)
-// }
+export default function (app: App) {
+	app.use(registProperties)
+}

@@ -55,7 +55,11 @@ export function mapMenusToRoutes(userMenu: any[]): RouteRecordRaw[] {
  * @param {IBreadcrumb[]} breadcrumbs 面包屑配置数组
  * @return {any} 匹配后的userMenu
  */
-export function pathMapToMenu(userMenu: any[], currentPath: string, breadcrumbs?: IBreadcrumb[]): any {
+export function pathMapToMenu(
+	userMenu: any[],
+	currentPath: string,
+	breadcrumbs?: IBreadcrumb[]
+): any {
 	for (const menu of userMenu) {
 		switch (menu.type) {
 			// case 指定代码块{}，存放语句，否则eslint报错。
@@ -86,4 +90,26 @@ export function pathMapBreadcrumbs(userMenu: any, currentPath: string) {
 	const breadcrumbs: IBreadcrumb[] = []
 	pathMapToMenu(userMenu, currentPath, breadcrumbs)
 	return breadcrumbs
+}
+
+/**
+ * @description:此函数用于，根据用户登录后获取的菜单，映射对应的权限字符串数组。
+ * @Author: ZeT1an
+ * @param {any} userMenus 用户登录后获取的菜单
+ * @return {string[]} 权限字符串数组，如"system:users:create"
+ */
+export function mapMenusToPermissions(userMenus: any[]) {
+	const permissions: string[] = []
+
+	const _recurseGetPermission = (menus: any[]) => {
+		for (const menu of menus) {
+			if (menu.type === 1 || menu.type === 2) {
+				_recurseGetPermission(menu.children ?? [])
+			} else if (menu.type === 3) {
+				permissions.push(menu.permission)
+			}
+		}
+	}
+	_recurseGetPermission(userMenus)
+	return permissions
 }

@@ -6,11 +6,11 @@
 			</template>
 			<template #footer>
 				<div class="btns-handle">
-					<el-button
-						><el-icon><refresh /></el-icon>
+					<el-button @click="handleResetBtnClick">
+						<el-icon><refresh /></el-icon>
 						重置
 					</el-button>
-					<el-button type="primary">
+					<el-button type="primary" @click="handleQueryBtnClick">
 						<el-icon><search /></el-icon>
 						搜索
 					</el-button>
@@ -23,26 +23,43 @@
 <script setup lang="ts">
 import ZtForm from '@/base-ui/form'
 import { Refresh, Search } from '@element-plus/icons-vue'
-import { defineProps, PropType } from 'vue'
-import type { IForm } from '@/base-ui/form'
-import { ref } from 'vue'
+import { defineProps, ref, defineEmits } from 'vue'
+import type { ISearchForm } from '@/base-ui/form'
+import type { IUserFormData } from '@/views/main/system/user/type'
 
-/* defineProps<{
-	searchFormConfig: IForm
-}>() */
-defineProps({
-	searchFormConfig: {
-		type: Object as PropType<IForm>,
-		required: true
-	}
-})
+const props = defineProps<{
+	searchFormConfig: ISearchForm
+}>()
+const emits = defineEmits<{
+	(e: 'resetBtnClick'): void
+	(e: 'queryBtnClick', formData: IUserFormData): void
+}>()
+
 // searchFormConfig中各对象field属性值，作为该对象的key
-const formData = ref({
-	name: '',
-	password: '',
-	sport: '',
-	createTime: ''
-})
+const formOriginData: any = {}
+for (const item of props.searchFormConfig.formItems) {
+	formOriginData[item.field] = ''
+}
+const formData = ref(formOriginData)
+
+// 重置按钮点击，使用双向绑定
+const handleResetBtnClick = () => {
+	for (const key in formOriginData) {
+		if (Object.prototype.hasOwnProperty.call(formOriginData, key)) {
+			formData.value[key] = formOriginData[key]
+		}
+	}
+	emits('resetBtnClick')
+}
+// 重置按钮点击，使用双向绑定
+/* const handleResetBtnClick = () => {
+	formData.value = formOriginData
+} */
+
+// 搜索按钮点击
+const handleQueryBtnClick = () => {
+	emits('queryBtnClick', formData.value)
+}
 </script>
 
 <style scoped lang="less">

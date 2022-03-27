@@ -1,7 +1,7 @@
 type IFormType = 'input' | 'password' | 'select' | 'datepicker'
 
 export interface IZtFormItem {
-	field: string
+	field: string // 对应的字段值，用于v-model双向绑定
 	type: IFormType
 	label: string
 	rules?: any[]
@@ -22,8 +22,8 @@ export interface IItemStyle {
 	padding?: string
 }
 // 与ZtForm中的 IProps 保持一致。
-export interface IForm {
-	formItem: IZtFormItem[]
+export interface ISearchForm {
+	formItems: IZtFormItem[]
 	labelWidth?: string
 	itemStyle?: IItemStyle
 	colLayout?: IColLayout

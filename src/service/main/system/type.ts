@@ -5,6 +5,6 @@ export interface IQuerInfo {
 
 // user页面请求主数据函数的参数类型
 export interface IUserPageListDataParam {
-	pageUrl: string
+	pageName: string
 	queryInfo: IQuerInfo
 }

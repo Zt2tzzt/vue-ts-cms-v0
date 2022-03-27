@@ -21,6 +21,17 @@ export interface IUserResponse {
 }
 
 export interface ISystemState {
-	userList: IUserList[]
-	userCount: number
+	usersList: IUserList[]
+	usersCount: number
+	roleList: any[]
+	roleCount: number
+	goodsList: any[]
+	goodsCount: number
+	menuList: any[]
+	menuCount: number
+}
+
+export interface IRoleData {
+	list: any[]
+	totalCount: number
 }

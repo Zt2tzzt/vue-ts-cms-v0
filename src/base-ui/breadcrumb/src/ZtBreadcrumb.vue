@@ -2,7 +2,9 @@
 	<div class="breadcrumb">
 		<el-breadcrumb separator="/">
 			<template v-for="bc of breadcrumbs" :key="bc.name">
-				<el-breadcrumb-item :to="bc.path ? { path: bc.path } : ''">{{ bc.name }}</el-breadcrumb-item>
+				<el-breadcrumb-item :to="bc.path ? { path: bc.path } : ''">{{
+					bc.name
+				}}</el-breadcrumb-item>
 			</template>
 		</el-breadcrumb>
 	</div>
@@ -10,13 +12,15 @@
 
 <script setup lang="ts">
 import type { IBreadcrumb } from '@/base-ui/breadcrumb'
-import { defineProps } from 'vue'
+import { defineProps, PropType } from 'vue'
 
 // 面包屑
-interface IProps {
-	breadcrumbs: IBreadcrumb[]
-}
-defineProps<IProps>()
+defineProps({
+	breadcrumbs: {
+		type: Array as PropType<IBreadcrumb[]>,
+		required: true
+	}
+})
 </script>
 
 <style scoped lang="less"></style>
