@@ -9,7 +9,8 @@ const store = createStore<IRootState>({
 	state() {
 		return {
 			entireDepartment: [],
-			entireRole: []
+			entireRole: [],
+			entireMenu: []
 		}
 	},
 	mutations: {
@@ -18,11 +19,14 @@ const store = createStore<IRootState>({
 		},
 		changeEntireRole(state, list) {
 			state.entireRole = list
+		},
+		changeEntireMenu(state, list) {
+			state.entireMenu = list
 		}
 	},
 	actions: {
 		getInitialDataAction({ commit }) {
-			// 1.请求部门和角色数据。
+			// 请求部门，角色和菜单数据。
 			getPageListData('/department/list', {
 				offset: 0,
 				size: 1000
@@ -34,6 +38,9 @@ const store = createStore<IRootState>({
 				size: 1000
 			}).then(res => {
 				commit('changeEntireRole', res.data.list)
+			})
+			getPageListData('/menu/list', {}).then(res => {
+				commit('changeEntireMenu', res.data.list)
 			})
 		}
 	},
@@ -50,8 +57,6 @@ const store = createStore<IRootState>({
 export function setupStore() {
 	// 初始化登录后获取的数据。
 	store.dispatch('login/loadLocalLogin')
-	// 初始化部门，角色等公共数据。
-	store.dispatch('getInitialDataAction')
 }
 
 /**

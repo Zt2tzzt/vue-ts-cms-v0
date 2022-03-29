@@ -112,7 +112,7 @@ const handleSelectChange = (selections: any[]) => {
 const certainSlots = ['startTime', 'updateTime', 'handler'] // 确定在page-content中公共使用的插槽
 const otherPropSlots = props.contentTableConfig.propList.filter(item => {
 	// 过滤没有slotName的，和slotName存在于确定插槽的item
-	return item.slotName && !certainSlots.includes(item.slotName) ? true : false
+	return item.slotName && !certainSlots.includes(item.slotName)
 })
 
 // 删除按钮点击

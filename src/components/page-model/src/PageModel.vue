@@ -3,6 +3,8 @@
 		<!-- destroy-on-close，当关闭 Dialog 时，销毁其中的元素 -->
 		<el-dialog v-model="dialogVisible" :title="title" width="30%" center destroy-on-close>
 			<zt-form v-bind="modelFormConfig" v-model="formData" />
+			<!-- 默认插槽 -->
+			<slot></slot>
 			<template #footer>
 				<span class="dialog-footer">
 					<el-button @click="dialogVisible = false">取消</el-button>
@@ -24,9 +26,12 @@ interface IProps {
 	modelFormConfig: ISearchForm
 	defaultInfo?: any
 	pageName: string
+	// 用于保存新建或编辑时，除了form以外的其它数据，如角色管理中的角色数据。
+	otherInfo?: any
 }
 const props = withDefaults(defineProps<IProps>(), {
-	defaultInfo: () => ({})
+	defaultInfo: () => ({}),
+	otherInfo: () => ({})
 })
 
 // 是否弹出弹窗，默认不弹出。
@@ -50,14 +55,14 @@ const handleConfirmBtnClick = () => {
 		// 编辑
 		store.dispatch('system/editPageDataAction', {
 			pageName: props.pageName,
-			editData: { ...formData.value },
+			editData: { ...formData.value, ...props.otherInfo },
 			id: props.defaultInfo.id
 		})
 	} else {
 		// 新建
 		store.dispatch('system/createPageDataAction', {
 			pageName: props.pageName,
-			newData: { ...formData.value }
+			newData: { ...formData.value, ...props.otherInfo }
 		})
 	}
 }

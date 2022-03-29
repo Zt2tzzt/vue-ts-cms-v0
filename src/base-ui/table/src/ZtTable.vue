@@ -81,7 +81,7 @@ const props = withDefaults(defineProps<IProps>(), {
 	listCount: 0,
 	showTableIndex: false,
 	showSelectColumn: false,
-	page: () => ({ currentPage: 0, pageSize: 10 }),
+	page: () => ({ currentPage: 1, pageSize: 10 }),
 	showFooter: true
 })
 const emits = defineEmits<{

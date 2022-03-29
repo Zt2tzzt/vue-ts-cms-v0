@@ -1,6 +1,10 @@
 <template>
 	<div class="goods">
-		<page-content :contentTableConfig="contentTableConfig" page-name="goods">
+		<page-content
+			:contentTableConfig="contentTableConfig"
+			page-name="goods"
+			:new-btn-label="newBtnLabel"
+		>
 			<!-- 状态列 -->
 			<template #status="scope">
 				<el-button size="small" plain :type="scope.row.status ? 'success' : 'danger'">
@@ -30,6 +34,8 @@
 <script setup lang="ts">
 import PageContent from '@/components/page-content/src/PageContent.vue'
 import { contentTableConfig } from './config/contentTableConfig'
+
+const newBtnLabel = '添加商品'
 </script>
 
 <style scoped></style>

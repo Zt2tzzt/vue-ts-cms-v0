@@ -12,7 +12,9 @@
 				<el-dropdown-menu>
 					<el-dropdown-item :icon="User">用户信息</el-dropdown-item>
 					<el-dropdown-item :icon="Setting">系统管理</el-dropdown-item>
-					<el-dropdown-item :icon="CircleClose" divided>退出登录</el-dropdown-item>
+					<el-dropdown-item :icon="CircleClose" divided @click="handleExitBtnClick"
+						>退出登录</el-dropdown-item
+					>
 				</el-dropdown-menu>
 			</template>
 		</el-dropdown>
@@ -23,8 +25,16 @@
 import { CircleClose, User, Setting } from '@element-plus/icons-vue'
 import { computed } from 'vue'
 import { useStore } from '@/store'
+import storage from '@/utils/cache'
+import { useRouter } from 'vue-router'
 
 const nickName = computed(() => useStore().state.login.userInfo.name)
+// 退出登录
+const router = useRouter()
+const handleExitBtnClick = () => {
+	storage.deleteCache('token')
+	router.push('/main')
+}
 </script>
 
 <style scoped lang="less">

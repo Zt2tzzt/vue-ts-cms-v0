@@ -1,5 +1,10 @@
 type IFormType = 'input' | 'password' | 'select' | 'datepicker'
 
+export interface IZtFormItemOptions {
+	title: string
+	value: string | number
+}
+
 export interface IZtFormItem {
 	field: string // 对应的字段值，用于v-model双向绑定
 	type: IFormType
@@ -7,7 +12,7 @@ export interface IZtFormItem {
 	rules?: any[]
 	placeholder?: any
 	// 针对select
-	options?: any[]
+	options?: IZtFormItemOptions[]
 	// 针对某些特殊属性，如datapicker
 	otherOption?: any
 	// 是否隐藏输入框，用于编辑时弹出el-dialog时，隐藏不需要的输入项。

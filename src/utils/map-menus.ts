@@ -102,14 +102,35 @@ export function mapMenusToPermissions(userMenus: any[]) {
 	const permissions: string[] = []
 
 	const _recurseGetPermission = (menus: any[]) => {
-		for (const menu of menus) {
+		menus.forEach(menu => {
 			if (menu.type === 1 || menu.type === 2) {
 				_recurseGetPermission(menu.children ?? [])
 			} else if (menu.type === 3) {
 				permissions.push(menu.permission)
 			}
-		}
+		})
 	}
 	_recurseGetPermission(userMenus)
 	return permissions
+}
+
+/**
+ * @description: 此函数用于，映射现有角色的菜单列表中的所有叶子节点菜单。
+ * @Author: ZeT1an
+ * @param {any[]} menuList 已有角色的菜单列表
+ * @return {number[]} 菜单列表的叶子节点数组
+ */
+export function menuMapLeafKeys(menuList: any[]) {
+	const leafKeys: number[] = []
+	const _recurseGetLeaf = (menuList: any[]) => {
+		menuList.forEach(menu => {
+			if (menu.children) {
+				_recurseGetLeaf(menu.children)
+			} else {
+				leafKeys.push(menu.id)
+			}
+		})
+	}
+	_recurseGetLeaf(menuList)
+	return leafKeys
 }

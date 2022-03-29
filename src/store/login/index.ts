@@ -39,12 +39,16 @@ const loginModule: Module<ILoginState, IRootState> = {
 		}
 	},
 	actions: {
-		async accountLoginAction({ commit }, payload: IAccount) {
+		async accountLoginAction({ commit, dispatch }, payload: IAccount) {
 			// 1.实现登录逻辑
 			const loginRes = await accountLoginRequest(payload)
 			const { token, id } = loginRes.data
 			commit('changeToken', token)
 			storage.setCache('token', token)
+
+			// 1.1.拿到token后，初始化部门，角色等公共数据。
+			dispatch('getInitialDataAction', null, { root: true })
+
 			// 2.请求用户信息
 			const userInfoRes = await requestUserInfoById(id)
 			const userInfo = userInfoRes.data
@@ -62,10 +66,12 @@ const loginModule: Module<ILoginState, IRootState> = {
 		 * @description: 用户刷新页面时执行的函数，用于初始化登录信息，包括token，用户信息，用户菜单
 		 * @Author: ZeT1an
 		 */
-		loadLocalLogin({ commit }) {
+		loadLocalLogin({ commit, dispatch }) {
 			const token = storage.getCache('token')
 			if (token) {
 				commit('changeToken', token)
+				// 拿到token后，初始化部门，角色等公共数据。
+				dispatch('getInitialDataAction', null, { root: true })
 			}
 			const userInfo = storage.getCache('userInfo')
 			if (userInfo) {

@@ -7,8 +7,8 @@
 		/>
 		<page-content
 			:contentTableConfig="contentTableConfig"
-			:newBtnLabel="newBtnLabel"
-			pageName="users"
+			newBtnLabel="新建用户"
+			:pageName="pageName"
 			ref="pageContentRef"
 			@newBtnClick="(handleNewBtnClick as any)"
 			@editBtnClick="(handlEeditBtnClick as any)"
@@ -22,10 +22,10 @@
 		</page-content>
 		<page-model
 			ref="pageModelRef"
-			:title="pageModelTitle"
+			title="新建用户"
 			:modelFormConfig="modelFormConfigRef"
 			:defaultInfo="defaultInfo"
-			pageName="users"
+			:pageName="pageName"
 		/>
 	</div>
 </template>
@@ -42,18 +42,15 @@ import { modelFormConfig } from './config/modelFormConfig'
 import usePageSearch from '@/hooks/usePageSearch'
 import usePageModel from '@/hooks/usePageModel'
 import { useStore } from '@/store'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
-const newBtnLabel = '新建用户'
-const pageModelTitle = ref(newBtnLabel)
+const pageName = 'users'
 // 1.新建/编辑时，执行回调函数，操作password输入框是否需要隐藏。
 const newCallback = () => {
-	pageModelTitle.value = '新建用户'
 	const passwordItem = modelFormConfig.formItems.find(item => item.field === 'password')
 	passwordItem!.isHidden = false
 }
 const editCallback = () => {
-	pageModelTitle.value = '编辑用户'
 	const passwordItem = modelFormConfig.formItems.find(item => item.field === 'password')
 	passwordItem!.isHidden = true
 }
