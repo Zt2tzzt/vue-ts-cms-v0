@@ -9,3 +9,5 @@ declare const $store: Store
 declare const $filters: {
 	formatTime: (val: string) => string
 }
+
+declare module '*.json'

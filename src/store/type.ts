@@ -1,3 +1,4 @@
+import { IDashboardState } from './main/analysis/type'
 import type { ILoginState } from './login/type'
 import { ISystemState } from './main/system/type'
 
@@ -60,4 +61,5 @@ export interface IRootState {
 export interface IRootWithModule extends IRootState {
 	login: ILoginState
 	system: ISystemState
+	dashboard: IDashboardState
 }

@@ -1,50 +1,86 @@
 <template>
 	<div class="dashboard">
-		<div class="div-ref" ref="divRef" style="width: 500px; height: 500px"></div>
+		<!-- 第一行图表 -->
+		<el-row :gutter="10">
+			<el-col :span="7">
+				<zt-card title="分类商品销量（饼图）">
+					<pie-echart :pie-data="categgoryGoodsData" />
+				</zt-card>
+			</el-col>
+			<el-col :span="10">
+				<zt-card title="不同城市商品销量">
+					<MapEchart :map-data="addressGoodsCountData" />
+				</zt-card>
+			</el-col>
+			<el-col :span="7">
+				<zt-card title="分类商品销量（玫瑰图）">
+					<rose-echart :rose-data="categgoryGoodsData" />
+				</zt-card>
+			</el-col>
+		</el-row>
+		<!-- 第二行图表 -->
+		<el-row :gutter="10" class="content-row">
+			<el-col :span="12">
+				<zt-card title="分类商品销量">
+					<LineEchart v-bind="categoryGoodsSaleData" />
+				</zt-card>
+			</el-col>
+			<el-col :span="12">
+				<zt-card title="分类商品的收藏数量">
+					<BarEchart v-bind="categoryGoodsFavorData" />
+				</zt-card>
+			</el-col>
+		</el-row>
 	</div>
 </template>
 
 <script setup lang="ts">
-import * as echarts from 'echarts'
-import { onMounted, ref } from 'vue'
+import { useStore } from '@/store'
+import ZtCard from '@/base-ui/card'
+import { PieEchart } from '@/components/page-echarts'
+import { computed } from 'vue'
+import { RoseEchart, LineEchart, BarEchart, MapEchart } from '@/components/page-echarts'
 
-const divRef = ref<HTMLElement>()
-onMounted(() => {
-	// 1.初始化ECharts实例, echarts.init(dom, theme, options
-	const echartInstance = echarts.init(divRef.value!, 'light', { renderer: 'svg' })
-	// 2.编写配置文件
-	const option = {
-		title: {
-			text: 'ECharts 入门示例',
-			subtext: '哈哈哈哈'
-		},
-		// 鼠标放在图表上的显示效果
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: {
-				type: 'shadow'
-			}
-		},
-		// legend会更具series中的name自动提取。
-		legend: {
-			data: ['销量']
-		},
-		xAxis: {
-			data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
-		},
-		// y轴刻度，根据实际数据显示。
-		yAxis: {},
-		series: [
-			{
-				name: '销量',
-				type: 'bar',
-				data: [5, 20, 36, 10, 10, 20]
-			}
-		]
-	}
-	// 3.设置配置，并且开始绘制。
-	echartInstance.setOption(option)
+const store = useStore()
+store.dispatch('dashboard/getDashboardDataAction')
+
+// 获取数据
+const categgoryGoodsData = computed(() => {
+	return store.state.dashboard.categgoryGoodsCount.map(item => {
+		return { name: item.name, value: item.goodsCount }
+	})
 })
+// 获取商品销量数据
+const categoryGoodsSaleData = computed(() => {
+	const xlabels: string[] = []
+	const values: number[] = []
+	const saleData = store.state.dashboard.categgoryGoodsSale
+	saleData.forEach(item => {
+		xlabels.push(item.name)
+		values.push(item.goodsCount)
+	})
+	return { xlabels, values }
+})
+// 获取商品收藏数据
+const categoryGoodsFavorData = computed(() => {
+	const xlabels: string[] = []
+	const values: number[] = []
+	const favorData = store.state.dashboard.categgoryGoodsFavor
+	favorData.forEach(item => {
+		xlabels.push(item.name)
+		values.push(item.goodsFavor)
+	})
+	return { xlabels, values }
+})
+// 获取商品地区销量数据
+const addressGoodsCountData = computed(() => store.state.dashboard.addressGoodsSale)
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+.dashboard {
+	background-color: #f5f5f5;
+}
+.content-row {
+	margin-top: 20px;
+}
+</style>
