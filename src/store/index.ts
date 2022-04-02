@@ -27,19 +27,21 @@ const store = createStore<IRootState>({
 	},
 	actions: {
 		getInitialDataAction({ commit }) {
-			// 请求部门，角色和菜单数据。
+			// 请求部门数据。
 			getPageListData('/department/list', {
 				offset: 0,
 				size: 1000
 			}).then(res => {
 				commit('changeEntireDepartment', res.data.list)
 			})
+			// 请求角色数据
 			getPageListData('/role/list', {
 				offset: 0,
 				size: 1000
 			}).then(res => {
 				commit('changeEntireRole', res.data.list)
 			})
+			// 请求菜单数据
 			getPageListData('/menu/list', {}).then(res => {
 				commit('changeEntireMenu', res.data.list)
 			})

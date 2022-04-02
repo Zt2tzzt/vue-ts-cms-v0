@@ -1,9 +1,7 @@
 import * as echarts from 'echarts'
 import chinaMapData from '@/base-ui/base-echarts/data/china.json'
 
-// 注册中国地图
-echarts.registerMap('china', chinaMapData)
-
+echarts.registerMap('china', chinaMapData) // 注册中国地图
 export default function (el: HTMLElement) {
 	// 1.初始化ECharts实例, echarts.init(dom, theme, options
 	const echartInstance = echarts.init(el, 'light', { renderer: 'svg' })

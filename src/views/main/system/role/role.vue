@@ -45,8 +45,8 @@ import { computed, nextTick, ref } from 'vue'
 import { menuMapLeafKeys } from '@/utils/map-menus'
 import { ElTree } from 'element-plus'
 
-// 处理page-model的hook
 const elTreeRef = ref<InstanceType<typeof ElTree>>()
+// 处理page-model的hook，点击编辑按钮时触发，给el-tree设置选中的叶子节点。
 const editCallback = (row: any) => {
 	const leafKeys = menuMapLeafKeys(row.menuList)
 	nextTick(() => {
@@ -58,14 +58,15 @@ const [pageModelRef, handleNewBtnClick, handlEeditBtnClick, defaultInfo] = usePa
 	undefined,
 	editCallback
 )
-
+// 拿到menu的数据，设置给el-tree
 const store = useStore()
 const menus = computed(() => store.state.entireMenu)
-
+// otherInfo用于绑定el-tree中选中的节点
 const otherInfo = ref({})
+// data1代表所有的节点，data2代表选中的节点。
 const handleElthreeCheckChange = (data1: any, data2: any) => {
-	const checkedKeys = data2.checkedKeys
-	const halfCheckedKeys = data2.halfCheckedKeys
+	const checkedKeys = data2.checkedKeys // 选中的叶子节点
+	const halfCheckedKeys = data2.halfCheckedKeys // 半选中的节点。
 	const menuList = [...checkedKeys, ...halfCheckedKeys]
 	otherInfo.value = { menuList }
 }

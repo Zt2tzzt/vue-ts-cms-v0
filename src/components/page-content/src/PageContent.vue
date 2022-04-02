@@ -4,10 +4,10 @@
 			:listData="dataList"
 			:listCount="dataCount"
 			@selectChange="handleSelectChange"
+			v-model:pageInfo="pageInfo"
 			v-bind="contentTableConfig"
-			v-model:page="pageInfo"
 		>
-			<!-- header中的插槽 -->
+			<!-- 使用header插槽 -->
 			<template #headerHandle>
 				<el-button type="primary" size="default" v-if="isCreate" @click="handleNewBtnClick">
 					{{ newBtnLabel }}
@@ -45,8 +45,8 @@
 			<template v-for="item in (otherPropSlots as any)" :key="item.prop" #[item.slotName]="scope">
 				<slot :name="item.slotName" :row="scope.row" />
 			</template>
-			<!-- footer中的插槽 -->
-			<template #footer></template>
+			<!-- 使用footer插槽 -->
+			<!-- <template #footer></template> -->
 		</zt-table>
 	</div>
 </template>
@@ -103,7 +103,7 @@ getPageData()
 const dataList = computed(() => store.getters['system/pageListData'](props.pageName))
 const dataCount = computed(() => store.getters['system/pageListCount'](props.pageName))
 
-// 处理选中改变的事件
+// 处理行选中事件
 const handleSelectChange = (selections: any[]) => {
 	console.log('---selections---', selections)
 }

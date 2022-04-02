@@ -39,7 +39,7 @@ class ZTRequest {
 		// 使用拦截器（全局拦截器）
 		this.instance.interceptors.request.use(
 			config => {
-				console.log('全局拦截，请求成功')
+				// console.log('全局拦截，请求成功')
 				if (this.showLoading) {
 					this.loadingInstance = ElLoading.service({
 						lock: true,
@@ -50,31 +50,22 @@ class ZTRequest {
 				return config
 			},
 			err => {
-				console.log('全局拦截，请求失败')
+				// console.log('全局拦截，请求失败')
 				return err
 			}
 		)
 		this.instance.interceptors.response.use(
 			res => {
-				console.log('全局拦截，响应成功')
+				// console.log('全局拦截，响应成功')
 				// 关闭loading动画
 				this.loadingInstance?.close()
 				const data = res.data
-				/* if (data.code !== 200) {
-					console.log('请求失败')
-				} else {
-					return data
-				} */
 				return data
 			},
 			err => {
-				console.log('全局拦截，响应失败')
+				// console.log('全局拦截，响应失败')
 				// 关闭loading动画
 				this.loadingInstance?.close()
-				// 示例
-				/* if (err.response.status === 404) {
-					console.log('404错误')
-				} */
 				return err
 			}
 		)

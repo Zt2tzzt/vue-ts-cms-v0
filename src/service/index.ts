@@ -12,19 +12,19 @@ const ztRequest = new ZTRequest({
 			if (token) {
 				config.headers!.Authorization = `Bearer ${token}`
 			}
-			console.log('单例拦截，请求成功')
+			// console.log('单例拦截，请求成功')
 			return config
 		},
 		requestInterceptorCatch(err) {
-			console.log('单例拦截，请求失败')
+			// console.log('单例拦截，请求失败')
 			return err
 		},
 		responseInterceptor(res) {
-			console.log('单例拦截，响应成功')
+			// console.log('单例拦截，响应成功')
 			return res
 		},
 		responseInterceptorCatch(err) {
-			console.log('单例拦截，响应失败')
+			// console.log('单例拦截，响应失败')
 			return err
 		}
 	}

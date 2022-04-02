@@ -43,18 +43,14 @@
 				<div class="demo-pagination-block">
 					<el-pagination
 						:page-sizes="[10, 20, 30]"
-						:page-size="page.pageSize"
-						:current-page="page.currentPage"
+						:page-size="pageInfo.pageSize"
+						:current-page="pageInfo.currentPage"
 						@size-change="handleSizeChange"
 						@current-change="handleCurrentChange"
 						layout="total, sizes, prev, pager, next, jumper"
 						:total="listCount"
 					/>
 				</div>
-				<!--
-						:small="small"
-						:disabled="disabled"
-						:background="background" -->
 			</slot>
 		</div>
 	</div>
@@ -66,13 +62,14 @@ import type { ITableProp, IPageInfo } from '@/base-ui/table'
 import { ITableChildrenProps } from '../type'
 
 interface IProps {
-	title?: string
 	listData: any[]
 	listCount: number
+	pageInfo?: IPageInfo
+	// v-bind中的内容
 	propList: ITableProp[]
 	showTableIndex?: boolean
 	showSelectColumn?: boolean
-	page?: IPageInfo
+	title?: string
 	childrenProps?: ITableChildrenProps
 	showFooter?: boolean
 }
@@ -81,14 +78,14 @@ const props = withDefaults(defineProps<IProps>(), {
 	listCount: 0,
 	showTableIndex: false,
 	showSelectColumn: false,
-	page: () => ({ currentPage: 1, pageSize: 10 }),
+	pageInfo: () => ({ currentPage: 1, pageSize: 10 }),
 	showFooter: true
 })
 const emits = defineEmits<{
 	(e: 'selectChange', selections: any[]): void
-	(e: 'update:page', page: IPageInfo): void
+	(e: 'update:pageInfo', pageInfo: IPageInfo): void
 }>()
-// const emits = defineEmits(['selectChange', 'update:page'])
+// const emits = defineEmits(['selectChange', 'update:pageInfo'])
 
 // 监听table中的行选中事件。
 const handleSelectChange = (selections: any[]) => {
@@ -97,11 +94,11 @@ const handleSelectChange = (selections: any[]) => {
 // 监听pageSize改变的事件
 const handleSizeChange = (pageSize: number) => {
 	console.log('---pagesize change---', pageSize)
-	emits('update:page', { ...props.page, pageSize })
+	emits('update:pageInfo', { ...props.pageInfo, pageSize })
 }
 // 监听currentPage改变的事件。
 const handleCurrentChange = (currentPage: number) => {
-	emits('update:page', { ...props.page, currentPage })
+	emits('update:pageInfo', { ...props.pageInfo, currentPage })
 }
 </script>
 

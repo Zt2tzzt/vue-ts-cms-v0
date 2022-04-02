@@ -22,7 +22,7 @@ switch (process.env.NODE_ENV) {
 		BASE_URL = '/dev'
 		break
 	case 'production':
-		BASE_URL = '/api'
+		BASE_URL = '/dev'
 		break
 	case 'test':
 		BASE_URL = '/api'

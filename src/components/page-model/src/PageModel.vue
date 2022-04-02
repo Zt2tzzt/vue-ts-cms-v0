@@ -37,7 +37,7 @@ const props = withDefaults(defineProps<IProps>(), {
 // 是否弹出弹窗，默认不弹出。
 const dialogVisible = ref(false)
 const formData = ref<any>({})
-// 监听defaultInfo的变化
+// 监听defaultInfo的变化，根据它生成formData。
 watch(
 	() => props.defaultInfo,
 	newVal => {
