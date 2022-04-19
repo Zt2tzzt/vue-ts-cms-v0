@@ -8,7 +8,7 @@ import type { AxiosInstance } from 'axios'
 import type { ZTRequestInterceptor, ZTRequestConfig } from './type'
 
 import { ElLoading } from 'element-plus'
-import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
+import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 
 const DEFAULT_LOADING = true
 
@@ -78,7 +78,7 @@ class ZTRequest {
 			if (config.interceptor?.requestInterceptor) {
 				config = config.interceptor.requestInterceptor(config)
 			}
-			// 2.判断是否要显示loading
+			// 2.为单独的请求封装showloading功能，判断是否要显示loading，必须明确指定false，否则没设置showLoading，也会被判定为false。
 			if (config.showLoading === false) {
 				this.showLoading = config.showLoading
 			}

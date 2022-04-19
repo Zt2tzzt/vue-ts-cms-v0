@@ -9,7 +9,6 @@ export default function (el: HTMLElement) {
 	const setOptions = (options: echarts.EChartsOption) => {
 		echartInstance.setOption(options)
 	}
-
 	// 根据页面缩放实时的调整图标大小。
 	window.addEventListener('resize', () => {
 		echartInstance.resize()

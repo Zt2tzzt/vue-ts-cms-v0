@@ -39,6 +39,10 @@ const loginModule: Module<ILoginState, IRootState> = {
 		}
 	},
 	actions: {
+		/**
+		 * @description: 此函数用于，用户登录后，获取token（获取后初始化全局的数据），用户信息，用户菜单
+		 * @Author: ZeT1an
+		 */
 		async accountLoginAction({ commit, dispatch }, payload: IAccount) {
 			// 1.实现登录逻辑
 			const loginRes = await accountLoginRequest(payload)

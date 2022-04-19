@@ -27,9 +27,11 @@ const handleFoldClick = () => {
 	emit('foldChange', isFold.value)
 }
 // 面包屑
+const store = useStore()
+const route = useRoute()
 const breadcrumbs = computed(() => {
-	const userMenu = useStore().state.login.userMenu
-	const currentPath = useRoute().path
+	const userMenu = store.state.login.userMenu
+	const currentPath = route.path
 	return pathMapBreadcrumbs(userMenu, currentPath)
 })
 </script>

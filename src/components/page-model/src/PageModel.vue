@@ -47,8 +47,8 @@ watch(
 	}
 )
 
-// 确定按钮点击
 const store = useStore()
+// 确定按钮点击
 const handleConfirmBtnClick = () => {
 	dialogVisible.value = false
 	if (Reflect.ownKeys(props.defaultInfo).length) {

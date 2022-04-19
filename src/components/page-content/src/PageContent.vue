@@ -9,6 +9,7 @@
 		>
 			<!-- 使用header插槽 -->
 			<template #headerHandle>
+				<!-- 新建按钮 -->
 				<el-button type="primary" size="default" v-if="isCreate" @click="handleNewBtnClick">
 					{{ newBtnLabel }}
 				</el-button>
@@ -16,11 +17,11 @@
 			<!-- 列中共有的插槽 -->
 			<!-- 开始时间列 -->
 			<template #startTime="scope">
-				<span>{{ $filters.formatTime(scope.row.createAt) }}</span>
+				<span>{{ formatUtcString(scope.row.createAt) }}</span>
 			</template>
 			<!-- 更新时间列 -->
 			<template #updateTime="scope">
-				<span>{{ $filters.formatTime(scope.row.updateAt) }}</span>
+				<span>{{ formatUtcString(scope.row.updateAt) }}</span>
 			</template>
 			<!-- 操作（删，改）列 -->
 			<template #handler="scope">
@@ -59,6 +60,7 @@ import type { IContentTable } from '@/base-ui/table'
 import { useStore } from '@/store'
 import { computed } from 'vue'
 import usePermission from '@/hooks/usePermission'
+import formatUtcString from '@/utils/date-format'
 
 interface IProps {
 	contentTableConfig: IContentTable

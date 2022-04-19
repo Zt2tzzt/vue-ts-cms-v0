@@ -118,7 +118,7 @@ export function mapMenusToPermissions(userMenus: any[]) {
  * @description: 此函数用于，映射现有角色的菜单列表中的所有叶子节点菜单。
  * @Author: ZeT1an
  * @param {any[]} menuList 已有角色的菜单列表
- * @return {number[]} 菜单列表的叶子节点数组
+ * @return {number[]} 菜单列表的叶子节点Id数组
  */
 export function menuMapLeafKeys(menuList: any[]) {
 	const leafKeys: number[] = []

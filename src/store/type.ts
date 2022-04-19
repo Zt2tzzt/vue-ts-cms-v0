@@ -51,12 +51,9 @@ export interface IRole {
 }
 
 export interface IRootState {
-	// 全部部门
-	entireDepartment: IDepartment[]
-	// 全部角色
-	entireRole: IRole[]
-	// 全部菜单数据
-	entireMenu: any[]
+	entireDepartment: IDepartment[] // 全部部门
+	entireRole: IRole[] // 全部角色
+	entireMenu: any[] // 全部菜单数据
 }
 export interface IRootWithModule extends IRootState {
 	login: ILoginState

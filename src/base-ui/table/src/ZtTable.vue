@@ -62,10 +62,10 @@ import type { ITableProp, IPageInfo } from '@/base-ui/table'
 import { ITableChildrenProps } from '../type'
 
 interface IProps {
-	listData: any[]
+	listData: any[] // 请求到的数据，用于el-table
 	listCount: number
 	pageInfo?: IPageInfo
-	// v-bind中的内容
+	// 父组件使用zt-table时，v-bind中的内容，用于遍历el-table-column
 	propList: ITableProp[]
 	showTableIndex?: boolean
 	showSelectColumn?: boolean

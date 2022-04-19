@@ -62,7 +62,8 @@ import { pathMapToMenu } from '@/utils/map-menus'
 defineProps<{
 	isCollapse: boolean
 }>()
-const userMenu = computed(() => useStore().state.login.userMenu)
+const store = useStore()
+const userMenu = computed(() => store.state.login.userMenu)
 const router = useRouter()
 // 表单点击后，路由跳转
 const handleElMenuItemClick = (url: string) => {
@@ -74,7 +75,8 @@ const handleElMenuItemClick = (url: string) => {
  * 2.与userMenu中的路径做匹配。
  * 3.将匹配后的userMenu的id设置给defaultActive
  */
-const currentPath = useRoute().path
+const route = useRoute()
+const currentPath = route.path
 const menu = pathMapToMenu(userMenu.value, currentPath)
 const defaultActive = ref(menu.id + '')
 </script>

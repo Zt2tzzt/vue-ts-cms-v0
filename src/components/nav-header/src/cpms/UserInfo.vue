@@ -29,8 +29,9 @@ import storage from '@/utils/cache'
 import { useRouter } from 'vue-router'
 
 const nickName = computed(() => useStore().state.login.userInfo.name)
-// 退出登录
+
 const router = useRouter()
+// 退出登录
 const handleExitBtnClick = () => {
 	storage.deleteCache('token')
 	router.push('/main')

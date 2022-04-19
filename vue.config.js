@@ -16,7 +16,7 @@ module.exports = defineConfig({
 		// 这个里面的配置，和webpack中的一致，本质上通过merge合并
 		/* resolve: {
 			alias: {
-				views: '@/views' //vue默认再path.resolve中已配置了@对应src目录
+				views: '@/views' //vue默认在path.resolve中已配置了@对应src目录
 			}
 		} */
 		module: {

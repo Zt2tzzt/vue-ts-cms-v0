@@ -40,6 +40,7 @@ export const searchFormConfig: ISearchForm = {
 			field: 'createAt',
 			type: 'datepicker',
 			label: '创建时间',
+			// 用于 el-date-picker 元素的属性选项
 			otherOption: {
 				type: 'daterange',
 				'start-placeholder': 'Start Date',
