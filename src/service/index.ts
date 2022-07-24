@@ -9,9 +9,7 @@ const ztRequest = new ZTRequest({
 		requestInterceptor(config) {
 			// 携带token的拦截
 			const token = storage.getCache('token')
-			if (token) {
-				config.headers!.Authorization = `Bearer ${token}`
-			}
+			if (token) config.headers!.Authorization = `Bearer ${token}`
 			// console.log('单例拦截，请求成功')
 			return config
 		},

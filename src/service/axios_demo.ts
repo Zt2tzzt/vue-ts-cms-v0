@@ -3,7 +3,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://httpbin.org'
 axios.defaults.timeout = 3000
 
-// axios的拦截其 fn1: 请求发送成功会执行的函数 fn2: 请求发送失败会执行的函数
+// axios 的拦截其 fn1: 请求发送成功会执行的函数 fn2: 请求发送失败会执行的函数
 axios.interceptors.request.use(
 	config => {
 		// 想做的一些操作 1.给请求添加token 2.isLoading动画

@@ -15,7 +15,7 @@ export function mapMenusToRoutes(userMenu: any[]): RouteRecordRaw[] {
 	const routes: RouteRecordRaw[] = []
 	// 定义所有的routes的数组
 	const allRoutes: RouteRecordRaw[] = []
-	// 使用webpack中reuire方法，加载/router/main下所有ts结尾的文件，第二个参数true代表递归加载， 不写/\.ts$/是考虑到可能会有tsx文件需要加载
+	// 使用webpack中require方法，加载/router/main下所有ts结尾的文件，第二个参数true代表递归加载， 不写/\.ts$/是考虑到可能会有tsx文件需要加载
 	const routeFiles = require.context('@/router/main', true, /\.ts/)
 	// 调用keys方法，返回一个文件路径构成的数组
 	routeFiles.keys().forEach(path => {

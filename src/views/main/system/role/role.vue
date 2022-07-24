@@ -46,7 +46,7 @@ import { menuMapLeafKeys } from '@/utils/map-menus'
 import { ElTree } from 'element-plus'
 
 const elTreeRef = ref<InstanceType<typeof ElTree>>()
-// 处理page-model的hook，点击编辑按钮时触发，给el-tree设置选中的叶子节点。
+// 处理 page-model 的 hook，点击编辑按钮时触发，给 el-tree 设置选中的叶子节点。
 const editCallback = (row: any) => {
 	const leafKeys = menuMapLeafKeys(row.menuList)
 	nextTick(() => {

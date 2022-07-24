@@ -78,13 +78,10 @@ const loginModule: Module<ILoginState, IRootState> = {
 				dispatch('getInitialDataAction', null, { root: true })
 			}
 			const userInfo = storage.getCache('userInfo')
-			if (userInfo) {
-				commit('changeUserInfo', userInfo)
-			}
+			if (userInfo) commit('changeUserInfo', userInfo)
+
 			const userMenu = storage.getCache('userMenu')
-			if (userMenu) {
-				commit('changeUserMenu', userMenu)
-			}
+			if (userMenu) commit('changeUserMenu', userMenu)
 		}
 	}
 }

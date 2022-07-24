@@ -87,7 +87,7 @@ watch(pageInfo, () => getPageData())
 // 2.请求数据
 const getPageData = (queryInfo: any = {}) => {
 	if (!isQuery) return
-	// 请求页面页面数据，在actions中使用async，await，使代码运行同步的
+	// 请求页面数据，在actions中使用async，await，使代码运行同步的
 	store.dispatch('system/getPageListAction', {
 		// 请求路径
 		pageName: props.pageName,
