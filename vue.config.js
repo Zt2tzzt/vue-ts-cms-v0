@@ -25,7 +25,7 @@ module.exports = defineConfig({
 		devServer: {
 			proxy: {
 				'/dev': {
-					target: 'http://152.136.185.210:5000', // 代理的目标地址，默认情况下将代理 http://152.136.185.210:5000/dev 这个路径
+					target: 'http://codercba.com:5000', // 代理的目标地址，默认情况下将代理 http://152.136.185.210:5000/dev 这个路径
 					pathRewrite: {
 						'^/dev': '' // 在代理路径中删除掉/dev
 					},
